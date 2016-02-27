@@ -49,6 +49,7 @@ app.use(function(err, req, res, next) {
 require('./server/config/passport')(passport); // pass passport for configuration
 require('./server/user-routes')(passport,app); // pass passport for configuration
 require('./server/anonymous-routes')(app);
+require('./server/protected-routes')(app);
 
 //app.use(require('./server/anonymous-routes'));
 //app.use(require('./server/protected-routes'));

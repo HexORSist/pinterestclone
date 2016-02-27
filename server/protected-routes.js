@@ -2,11 +2,16 @@ var express = require('express'),
     google = require('googleapis'),
     userSV  = require('./user.server');
     
-var app = module.exports = express.Router();
+//var app = module.exports = express.Router();
 
 /*var jwtCheck = jwt({
   secret: config.secret
 });*/
+
+module.exports = function(app) {
+  app.use('/api/protected', isLoggedIn);
+  
+}
 
 // route middleware to make sure a user is logged in
 var isLoggedIn = function (req, res, next) {
@@ -16,10 +21,10 @@ var isLoggedIn = function (req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.redirect('/signup');
 }
 
-app.use('/api/protected', isLoggedIn);
+/*app.use('/api/protected', isLoggedIn);
 
 app.post('/api/protected/books', function(req, res) {
   
@@ -80,7 +85,7 @@ app.post('/api/protected/booktaketrade', function(req, res){
     res.status(200).send('success');
   }
   userSV.booktaketrade(req.user._id,req.body,callback);
-});
+});*/
 
 
 

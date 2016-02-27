@@ -1,6 +1,8 @@
 var express = require('express'),
     _       = require('lodash'),
-    userSV  = require('./user.server');
+    userSV  = require('./user.server'),
+    jwt     = require('jsonwebtoken');
+
 
 module.exports = function(passport,app) {
   
@@ -23,12 +25,16 @@ module.exports = function(passport,app) {
         if (loginErr) {
           return next(loginErr);
         }
-        return res.send({ success : true, message : 'authentication succeeded' });
+        //return res.send({ success : true, message : 'authentication succeeded' });
+        return res.send({id_token: createToken(user)});
       });      
     })(req, res, next);
   });
+}
 
-
+function createToken(user) {
+  user.local = _.omit(user.local, 'password');
+  return jwt.sign(user, "thepinterestclone", { expiresInMinutes: 60*5 });
 }
 
 /*{
