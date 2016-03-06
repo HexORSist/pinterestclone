@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactMixin from 'react-mixin';
+//import ReactMixin from 'react-mixin';
+import linkState from 'react-link-state';
 import AuthenticatedComponent from './AuthenticatedComponent';
 import BookStore from '../stores/BookStore.js';
 import BookService from '../services/BookService.js';
@@ -77,7 +78,7 @@ class BookForm extends React.Component{
         <input
           type="text"
           placeholder="Book Search Name?"
-          valueLink={this.linkState('text')}
+          valueLink={linkState(this,'text')}
         />
         <input type="submit" value="Find Books"/>
       </form>
@@ -85,7 +86,7 @@ class BookForm extends React.Component{
     }
 }
 
-ReactMixin(BookForm.prototype, React.addons.LinkedStateMixin);
+//ReactMixin(BookForm.prototype, React.addons.LinkedStateMixin);
 
 class BookList extends React.Component {
     constructor(props) {

@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactMixin from 'react-mixin';
+//import ReactMixin from 'react-mixin';
+//import linkState from 'react-link-state';
 import AuthenticatedComponent from './AuthenticatedComponent';
 import BookTradeStore from '../stores/BookTradeStore.js';
 import BookTradeService from '../services/BookTradeService.js';

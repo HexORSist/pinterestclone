@@ -1,9 +1,11 @@
 'use strict';
 
 import React from 'react';
-import LoginStore from '../stores/LoginStore'
-import { Route, RouteHandler, Link } from 'react-router';
-import AuthService from '../services/AuthService'
+import LoginStore from '../stores/LoginStore';
+//import { RouteHandler } from 'react-router';
+import AuthService from '../services/AuthService';
+import { Nav, Navbar, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
+import { LinkContainer} from 'react-router-bootstrap';
 
 export default class AuthenticatedApp extends React.Component {
   constructor() {
@@ -20,6 +22,7 @@ export default class AuthenticatedApp extends React.Component {
   componentDidMount() {
     this.changeListener = this._onChange.bind(this);
     LoginStore.addChangeListener(this.changeListener);
+    //$( this.refs.toggleInput.getDOMNode() ).bootstrapToggle('on');
   }
 
   _onChange() {
@@ -33,13 +36,18 @@ export default class AuthenticatedApp extends React.Component {
   render() {
     return (
       <div className="container">
-        <nav className="navbar navbar-default">
-          <div className="navbar-header">
-            <a className="navbar-brand" href="/">The Book Club</a>
-          </div>
-          {this.headerItems}
-        </nav>
-        <RouteHandler/>
+        <Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#">The Pinterest Clone</a>
+            </Navbar.Brand>
+          </Navbar.Header>
+          <Navbar .Collapse>
+             {this.headerItems}
+          </Navbar .Collapse>
+        </Navbar>
+        {this.props.children}
+        {/*<RouteHandler/>*/}
       </div>
     );
   }
@@ -52,30 +60,37 @@ export default class AuthenticatedApp extends React.Component {
   get headerItems() {
     if (!this.state.userLoggedIn) {
       return (
-      <ul className="nav navbar-nav navbar-right">
-        <li>
-          <Link to="login">Login</Link>
-        </li>
-        <li>
-          <Link to="signup">Signup</Link>
-        </li>
-      </ul>)
+        <Nav pullRight>
+          <NavDropdown title="Authorization" id="basic-nav-dropdown">
+            <LinkContainer to="login">
+              <MenuItem>
+              Login
+              </MenuItem>
+            </LinkContainer>
+            <LinkContainer to="signup">
+              <MenuItem>
+              Signup
+              </MenuItem>
+            </LinkContainer>
+          </NavDropdown>
+        </Nav>
+            )
     } else {
       return (
-      <ul className="nav navbar-nav navbar-right">
-        <li>
-          <Link to="home">Home</Link>
-        </li>
-        <li>
-          <Link to="book">Book Inventory</Link>
-        </li>
-        <li>
-          <Link to="booktrade">Book Trade</Link>
-        </li>
-        <li>
-          <a href="" onClick={this.logout}>Logout</a>
-        </li>
-      </ul>)
+        <Nav bsStyle="pills" pullRight>
+          <NavItem eventKey={1}>
+            <Link to="home">Home</Link>
+          </NavItem>
+          <NavItem eventKey={2}>
+            <Link to="book">Book Inv</Link>
+          </NavItem>
+          <NavDropdown eventKey={3} title="Authorization" id="basic-nav-dropdown">
+            <MenuItem eventKey="3.1">
+              {/*<a href="" onClick={this.logout}>Logout</a>*/}
+            </MenuItem>          
+          </NavDropdown>  
+        </Nav>
+      )
     }
   }
 }

@@ -1,5 +1,7 @@
-import React from 'react/addons';
-import ReactMixin from 'react-mixin';
+//import React from 'react/addons';
+import React from 'react';
+//import ReactMixin from 'react-mixin';
+import linkState from 'react-link-state';
 import Auth from '../services/AuthService'
 
 export default class Signup extends React.Component {
@@ -33,15 +35,15 @@ export default class Signup extends React.Component {
         <form role="form">
         <div className="form-group">
           <label htmlFor="username">Username</label>
-          <input type="text" valueLink={this.linkState('user')} className="form-control" id="username" placeholder="Username" />
+          <input type="text" valueLink={linkState(this,'user')} className="form-control" id="username" placeholder="Username" />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <input type="password" valueLink={this.linkState('password')} className="form-control" id="password" ref="password" placeholder="Password" />
+          <input type="password" valueLink={linkState(this,'password')} className="form-control" id="password" ref="password" placeholder="Password" />
         </div>
         <div className="form-group">
           <label htmlFor="extra">Extra</label>
-          <input type="text" valueLink={this.linkState('extra')} className="form-control" id="password" ref="password" placeholder="Some extra information" />
+          <input type="text" valueLink={linkState(this,'extra')} className="form-control" id="password" ref="password" placeholder="Some extra information" />
         </div>
         <button type="submit" className="btn btn-default" onClick={this.signup.bind(this)}>Submit</button>
       </form>
@@ -50,4 +52,4 @@ export default class Signup extends React.Component {
   }
 }
 
-ReactMixin(Signup.prototype, React.addons.LinkedStateMixin);
+//ReactMixin(Signup.prototype, React.addons.LinkedStateMixin);
