@@ -12,14 +12,14 @@ export default {
     });
     
     if (savedJwt !== jwt) {
-      var nextPath = RouterContainer.get().getCurrentQuery().nextPath || '/';
+      //var nextPath = RouterContainer.get().getCurrentQuery().nextPath || '/';
 
-      RouterContainer.get().transitionTo(nextPath);
+      //RouterContainer.get().transitionTo(nextPath);
       localStorage.setItem('jwt', jwt);
     }
   },
   logoutUser: () => {
-    RouterContainer.get().transitionTo('/login');
+    //RouterContainer.get().transitionTo('/login');
     localStorage.removeItem('jwt');
     AppDispatcher.dispatch({
       actionType: LOGOUT_USER

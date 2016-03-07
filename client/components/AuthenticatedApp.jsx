@@ -78,15 +78,19 @@ export default class AuthenticatedApp extends React.Component {
     } else {
       return (
         <Nav bsStyle="pills" pullRight>
-          <NavItem eventKey={1}>
-            <Link to="home">Home</Link>
-          </NavItem>
-          <NavItem eventKey={2}>
-            <Link to="book">Book Inv</Link>
-          </NavItem>
-          <NavDropdown eventKey={3} title="Authorization" id="basic-nav-dropdown">
-            <MenuItem eventKey="3.1">
-              {/*<a href="" onClick={this.logout}>Logout</a>*/}
+          <LinkContainer to="home">  
+            <NavItem>
+              Home
+            </NavItem>
+          </LinkContainer>
+          <LinkContainer to="book">  
+            <NavItem>
+              Book Inv
+            </NavItem>
+          </LinkContainer>
+          <NavDropdown title="Authorization" id="basic-nav-dropdown">
+            <MenuItem onClick={this.logout}>
+              Logout{/*<a href="" onClick={this.logout}>Logout</a>*/}
             </MenuItem>          
           </NavDropdown>  
         </Nav>

@@ -51,7 +51,7 @@ module.exports = function(passport) {
 
             // check to see if theres already a user with that email
             if (user) {
-                return done(null, user);
+                return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
             } else {
 
                 // if there is no user with that email
@@ -70,6 +70,36 @@ module.exports = function(passport) {
                 });
             }
 
+        });    
+
+       // });
+
+    }));
+    
+    passport.use('local-login', new LocalStrategy({usernameField: 'username',
+                                                    passwordField: 'password',
+                                                    passReqToCallback: true},
+        function(req, username, password, done) {
+
+        // asynchronous
+        // User.findOne wont fire unless data is sent back
+       // process.nextTick(function() {
+
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        User.findOne({ 'local.username' :  username }, function(err, user) {
+            // if there are any errors, return the error
+            if (err)
+                return done(err);
+
+            // check to see if theres already a user with that email
+            if (!user) 
+                return done(null, false, req.flash('loginMessage', 'No user found.'));
+            
+            if (!user.validPassword(password))
+                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+            
+            return done(null, user);
         });    
 
        // });

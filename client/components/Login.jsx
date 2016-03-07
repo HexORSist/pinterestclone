@@ -20,10 +20,10 @@ export default class Login extends React.Component {
       alert("you must enter user name and password")
     else{
       Auth.login(this.state.user, this.state.password)
-        .catch(function(err) {
+        /*.catch(function(err) {
           alert("There's an error logging in");
           console.log("Error logging in", err);
-        });
+        });*/
     }
   }
 

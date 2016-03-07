@@ -13,7 +13,7 @@ module.exports = function(passport,app) {
       }
       // Generate a JSON response reflecting authentication status
       if (! user) {
-        return res.send({ success : false, message : 'authentication failed' });
+        return res.send({ success : false, message : req.flash('signupMessage') });
       }
       // ***********************************************************************
       // "Note that when using a custom callback, it becomes the application's
@@ -26,10 +26,37 @@ module.exports = function(passport,app) {
           return next(loginErr);
         }
         //return res.send({ success : true, message : 'authentication succeeded' });
-        return res.send({id_token: createToken(user)});
+        return res.send({success: true, id_token: createToken(user)});
       });      
     })(req, res, next);
   });
+  
+  app.post('/login', function(req, res, next) {
+    passport.authenticate('local-login', function(err, user, info) {
+      if (err) {
+        return next(err); // will generate a 500 error
+      }
+      // Generate a JSON response reflecting authentication status
+      if (! user) {
+        return res.send({ success : false, message : req.flash('loginMessage') });
+      }
+      // ***********************************************************************
+      // "Note that when using a custom callback, it becomes the application's
+      // responsibility to establish a session (by calling req.login()) and send
+      // a response."
+      // Source: http://passportjs.org/docs
+      // ***********************************************************************
+      req.login(user, loginErr => {
+        if (loginErr) {
+          return next(loginErr);
+        }
+        //return res.send({ success : true, message : 'authentication succeeded' });
+        return res.send({ success: true, id_token: createToken(user)});
+      });      
+    })(req, res, next);
+  });
+  
+  
 }
 
 function createToken(user) {

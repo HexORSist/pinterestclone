@@ -1,19 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import AuthenticatedApp from './components/AuthenticatedApp'
+import AuthenticatedApp from './components/AuthenticatedApp';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home';
 import Book from './components/Book';
 import BookTrade from './components/BookTrade';
-import RouterContainer from './services/RouterContainer';
-import LoginActions from './actions/LoginActions';
+//import RouterContainer from './services/RouterContainer';
+//import LoginActions from './actions/LoginActions';
 
 var routes = (
   <Router  history={browserHistory}>
     <Route path="/" component={AuthenticatedApp}>
       <IndexRoute component={Home}/>
+      <Route path="home" component={Home}/>
       <Route path="login" component={Login}/>
       <Route path="signup" component={Signup}/>
       <Route path="book" component={Book}/>

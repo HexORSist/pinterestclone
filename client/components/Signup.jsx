@@ -21,10 +21,10 @@ export default class Signup extends React.Component {
       alert("you must enter user name and password")
     else{
       Auth.signup(this.state.user, this.state.password, this.state.extra)
-        .catch(function(err) {
+        /*.catch(function(err) {
           alert("There's an error logging in");
           console.log("Error logging in", err);
-        });
+        });*/
     }
   }
 
