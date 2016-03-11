@@ -18,12 +18,13 @@ export default {
 
       //var RTCnt = RouterContainer.get();
       //this.context.router.get().transitionTo('/home');
-      browserHistory.push('/home/');
+      browserHistory.push('/home');
       localStorage.setItem('jwt', jwt);
     }
   },
   logoutUser: () => {
     //RouterContainer.get().transitionTo('/login');
+    browserHistory.push('/home');
     localStorage.removeItem('jwt');
     
     AppDispatcher.dispatch({
