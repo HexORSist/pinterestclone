@@ -9,7 +9,7 @@ var express = require('express'),
 });*/
 
 module.exports = function(app) {
-  app.use('/api/protected', isLoggedIn);
+  app.use('/protected', isLoggedIn);
   
 }
 

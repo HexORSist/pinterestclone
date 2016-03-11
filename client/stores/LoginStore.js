@@ -17,7 +17,7 @@ class LoginStore extends BaseStore {
       case LOGIN_USER:
         this._jwt = action.jwt;
         this._user = jwt_decode(this._jwt);
-        //this._user = this._user.local.username;
+        this._user = this._user.local;
         this.emitChange();
         break;
       case LOGOUT_USER:

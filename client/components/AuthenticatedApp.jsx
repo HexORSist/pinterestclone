@@ -38,9 +38,13 @@ export default class AuthenticatedApp extends React.Component {
       <div className="container">
         <Navbar>
           <Navbar.Header>
-            <Navbar.Brand>
-              <a href="#">The Pinterest Clone</a>
-            </Navbar.Brand>
+            <Nav>
+              <LinkContainer to="home">  
+                <NavItem>
+                  The Pinterest Clone
+                </NavItem>
+              </LinkContainer>
+            </Nav>
           </Navbar.Header>
           <Navbar .Collapse>
              {this.headerItems}

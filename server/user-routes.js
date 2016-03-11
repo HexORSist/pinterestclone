@@ -56,12 +56,15 @@ module.exports = function(passport,app) {
     })(req, res, next);
   });
   
-  
+  app.get('/logout', function(req, res, next) {
+    req.logout();
+    res.redirect('/');
+  });
 }
 
 function createToken(user) {
   user.local = _.omit(user.local, 'password');
-  return jwt.sign(user, "thepinterestclone", { expiresInMinutes: 60*5 });
+  return jwt.sign(user.toObject(), "thepinterestclone", { expiresInMinutes: 60*5 });
 }
 
 /*{

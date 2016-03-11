@@ -1,6 +1,6 @@
 import request from 'reqwest';
 import when from 'when';
-import {LOGIN_URL, SIGNUP_URL} from '../constants/LoginConstants';
+import {LOGIN_URL, SIGNUP_URL, LOGOUT_URL} from '../constants/LoginConstants';
 import LoginActions from '../actions/LoginActions';
 
 class AuthService {
@@ -19,6 +19,10 @@ class AuthService {
 
   logout() {
     LoginActions.logoutUser();
+    return when(request({
+      url: LOGOUT_URL,
+      method: 'GET'
+    }));
   }
 
   signup(username, password, extra) {

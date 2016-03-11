@@ -8,7 +8,7 @@ import Home from './components/Home';
 import Book from './components/Book';
 import BookTrade from './components/BookTrade';
 //import RouterContainer from './services/RouterContainer';
-//import LoginActions from './actions/LoginActions';
+import LoginActions from './actions/LoginActions';
 
 var routes = (
   <Router  history={browserHistory}>
@@ -24,12 +24,12 @@ var routes = (
 );
 
 //var router = Router.create({routes});
-//RouterContainer.set(router);
+//RouterContainer.set(Router);
 
-/*let jwt = localStorage.getItem('jwt');
+let jwt = localStorage.getItem('jwt');
 if (jwt) {
   LoginActions.loginUser(jwt);
-}*/
+}
 
 /*router.run(function (Handler) {
   ReactDOM.render(<Handler />, document.getElementById('content'));
